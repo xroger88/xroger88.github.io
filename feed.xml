@@ -1,15 +1,195 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-04-07T14:37:55+09:00</updated><id>/feed.xml</id><entry><title type="html">Bananas</title><link href="/2020/04/06/bananas.html" rel="alternate" type="text/html" title="Bananas" /><published>2020-04-06T00:00:00+09:00</published><updated>2020-04-06T00:00:00+09:00</updated><id>/2020/04/06/bananas</id><content type="html" xml:base="/2020/04/06/bananas.html">&lt;p&gt;A banana is an edible fruit – botanically a berry – produced by several kinds
-of large herbaceous flowering plants in the genus Musa.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-04-07T17:05:26+09:00</updated><id>/feed.xml</id><entry><title type="html">Category Theory</title><link href="/2020/04/07/category-theory.html" rel="alternate" type="text/html" title="Category Theory" /><published>2020-04-07T00:00:00+09:00</published><updated>2020-04-07T00:00:00+09:00</updated><id>/2020/04/07/category-theory</id><content type="html" xml:base="/2020/04/07/category-theory.html">&lt;p&gt;Category Theory에 대한 이해&lt;/p&gt;
 
-&lt;p&gt;In some countries, bananas used for cooking may be called “plantains”,
-distinguishing them from dessert bananas. The fruit is variable in size, color,
-and firmness, but is usually elongated and curved, with soft flesh rich in
-starch covered with a rind, which may be green, yellow, red, purple, or brown
-when ripe.&lt;/p&gt;</content><author><name>xroger88</name></author><summary type="html">A banana is an edible fruit – botanically a berry – produced by several kinds of large herbaceous flowering plants in the genus Musa.</summary></entry><entry><title type="html">Kiwifruit</title><link href="/2020/04/06/kiwifruit.html" rel="alternate" type="text/html" title="Kiwifruit" /><published>2020-04-06T00:00:00+09:00</published><updated>2020-04-06T00:00:00+09:00</updated><id>/2020/04/06/kiwifruit</id><content type="html" xml:base="/2020/04/06/kiwifruit.html">&lt;p&gt;Kiwifruit (often abbreviated as kiwi), or Chinese gooseberry is the edible
-berry of several species of woody vines in the genus Actinidia.&lt;/p&gt;
+&lt;h1 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h1&gt;
 
-&lt;p&gt;The most common cultivar group of kiwifruit is oval, about the size of a large
-hen’s egg (5–8 cm (2.0–3.1 in) in length and 4.5–5.5 cm (1.8–2.2 in) in
-diameter). It has a fibrous, dull greenish-brown skin and bright green or
-golden flesh with rows of tiny, black, edible seeds. The fruit has a soft
-texture, with a sweet and unique flavor.&lt;/p&gt;</content><author><name>ted</name></author><summary type="html">Kiwifruit (often abbreviated as kiwi), or Chinese gooseberry is the edible berry of several species of woody vines in the genus Actinidia.</summary></entry></feed>
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;#org8de816b&quot;&gt;Category : the essence of composition&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#org4b5c7e0&quot;&gt;Types and Functions&lt;/a&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;#org7ed05f5&quot;&gt;Types are about composbility&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#org10dd9ae&quot;&gt;pure and dirty functions&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#org015612e&quot;&gt;example of types&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#orge839f11&quot;&gt;Category Great and Small&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Category Theory for Programmers, written by Bartosz Milewski&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&quot;org8de816b&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;category--the-essence-of-composition&quot;&gt;Category : the essence of composition&lt;/h1&gt;
+
+&lt;p&gt;Category theory is about composing arrows.&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&quot;org4b5c7e0&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;types-and-functions&quot;&gt;Types and Functions&lt;/h1&gt;
+
+&lt;p&gt;&lt;a id=&quot;org7ed05f5&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;types-are-about-composbility&quot;&gt;Types are about composbility&lt;/h2&gt;
+
+&lt;p&gt;operational semantics vs. denotational semantics&lt;/p&gt;
+
+&lt;p&gt;A factorial function has an obvious mathematical denotation. An astute reader
+might ask: What’s the mathematical model for reading a character from
+the keyboard or sending a packet across the network? For the longest
+time that would have been an awkward question leading to a rather convoluted explanation. It seemed like denotational semantics wasn’t the
+best fit for a considerable number of important tasks that were essential
+for writing useful programs, and which could be easily tackled by operational semantics. The breakthrough came from category theory. Eugenio Moggi discovered that computational effect can be mapped to monads. This turned out to be an important observation that not only gave
+denotational semantics a new lease on life and made pure functional
+programs more usable, but also shed new light on traditional programming.&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&quot;org10dd9ae&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;pure-and-dirty-functions&quot;&gt;pure and dirty functions&lt;/h2&gt;
+
+&lt;p&gt;&lt;a id=&quot;org015612e&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;example-of-types&quot;&gt;example of types&lt;/h2&gt;
+
+&lt;p&gt;empty set type is called “bottom” in math.
+how to represent that type? nothing meaningful in programming language but in math.&lt;/p&gt;
+
+&lt;p&gt;single-elemnt set type is called “singlton”, for example, void type.
+f :: void -&amp;gt; integer, f :: integer -&amp;gt; void
+not meaningful in programming but possible in math.&lt;/p&gt;
+
+&lt;p&gt;two-element set type, for example, bool type is that. True or False. Predicates
+is one of fucntions returning boolean type.&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&quot;orge839f11&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;category-great-and-small&quot;&gt;Category Great and Small&lt;/h1&gt;</content><author><name>xroger88</name></author><summary type="html">Category Theory에 대한 이해</summary></entry><entry><title type="html">Emacs</title><link href="/2020/04/07/emacs.html" rel="alternate" type="text/html" title="Emacs" /><published>2020-04-07T00:00:00+09:00</published><updated>2020-04-07T00:00:00+09:00</updated><id>/2020/04/07/emacs</id><content type="html" xml:base="/2020/04/07/emacs.html">&lt;p&gt;Emacs 대한 Tips 및 내가 경험한 문제/해결방법&lt;/p&gt;
+
+&lt;h1 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;#org10b70c5&quot;&gt;Doom Emacs&lt;/a&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;#orgad0a6af&quot;&gt;Doom Emacs Workflows by noel welsh&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#org4349fcf&quot;&gt;In case of that SPC / p is not working to search files having some text&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#org8b193d6&quot;&gt;Helm and Ivy : a search engine to find out texts and complete text/code&lt;sub&gt;keywords&lt;/sub&gt;/commands for helping the edior to select a complete one.&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#orga3de4ad&quot;&gt;How-to elisp Programming&lt;/a&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;#orgfec0d62&quot;&gt;An Introduction to Programming in Emacs Lisp&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a id=&quot;org10b70c5&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;doom-emacs&quot;&gt;Doom Emacs&lt;/h1&gt;
+
+&lt;p&gt;&lt;a id=&quot;orgad0a6af&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;doom-emacs-workflows-by-noel-welsh&quot;&gt;&lt;a href=&quot;https://noelwelsh.com/posts/2019-01-10-doom-emacs.html&quot;&gt;Doom Emacs Workflows by noel welsh&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;This is a good reference to get you familiar with basic workflow commands in
+Doom Emacs. Please check this first when you don’t know how to use
+something.&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&quot;org4349fcf&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;in-case-of-that-spc--p-is-not-working-to-search-files-having-some-text&quot;&gt;In case of that SPC / p is not working to search files having some text&lt;/h2&gt;
+
+&lt;p&gt;You need to install ripgrep (or silver search) so emacs can use rg, ag commands.
+In MacOS, just do “brew install ripgrep the&lt;sub&gt;silver&lt;/sub&gt;&lt;sub&gt;searcher&lt;/sub&gt;”.&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&quot;org8b193d6&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;helm-and-ivy--a-search-engine-to-find-out-texts-and-complete-textcode_keywordscommands-for-helping-the-edior-to-select-a-complete-one&quot;&gt;Helm and Ivy : a search engine to find out texts and complete text/code_keywords/commands for helping the edior to select a complete one.&lt;/h2&gt;
+
+&lt;p&gt;There are lot of mentions among emacs user around community online, which one is
+better. Each one has pros and cons so you need to choose or use both
+appropriately for your purpose. Ivy is more modularized than Helm, you see Ivy itself,
+and Counsel which wraps the common emacs search commands, Swiper which …&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&quot;orga3de4ad&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;how-to-elisp-programming&quot;&gt;How-to elisp Programming&lt;/h1&gt;
+
+&lt;p&gt;&lt;a id=&quot;orgfec0d62&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;todo-an-introduction-to-programming-in-emacs-lisp&quot;&gt;TODO &lt;a href=&quot;https://www.gnu.org/software/emacs/manual/eintr.html&quot;&gt;An Introduction to Programming in Emacs Lisp&lt;/a&gt;&lt;/h2&gt;</content><author><name>xroger88</name></author><summary type="html">Emacs 대한 Tips 및 내가 경험한 문제/해결방법</summary></entry><entry><title type="html">Org Mode</title><link href="/2020/04/06/org-mode.html" rel="alternate" type="text/html" title="Org Mode" /><published>2020-04-06T00:00:00+09:00</published><updated>2020-04-06T00:00:00+09:00</updated><id>/2020/04/06/org-mode</id><content type="html" xml:base="/2020/04/06/org-mode.html">&lt;p&gt;Org Mode에 대한 이해&lt;/p&gt;
+
+&lt;h1 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;#orgf63f1e0&quot;&gt;Org Online Manual&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#orgec4033b&quot;&gt;Tasks&lt;/a&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;#org81425e7&quot;&gt;writing weekly report&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#orgf274c93&quot;&gt;write introduction&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#org4b86b69&quot;&gt;finish document&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#org4b66449&quot;&gt;test my work item&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#org3a61cfc&quot;&gt;check-out something&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#org118ff77&quot;&gt;My Habits&lt;/a&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;#org9e5523c&quot;&gt;Golf Execise&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#orgb2a1f82&quot;&gt;Watching Movie&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;;#+STARTUP: lognotedone&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&quot;orgf63f1e0&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;org-online-manual&quot;&gt;&lt;a href=&quot;https://orgmode.org/manual/index.html#SEC_Contents&quot;&gt;Org Online Manual&lt;/a&gt;&lt;/h1&gt;
+
+&lt;p&gt;&lt;a id=&quot;orgec4033b&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;tasks&quot;&gt;Tasks&lt;/h1&gt;
+
+&lt;p&gt;&lt;a id=&quot;org81425e7&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;done-writing-weekly-report&quot;&gt;DONE writing weekly report&lt;/h2&gt;
+
+&lt;p&gt;&lt;a id=&quot;orgf274c93&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;done-write-introduction&quot;&gt;DONE write introduction&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;State “DONE”       from “VERIFIED”   &lt;span class=&quot;timestamp-wrapper&quot;&gt;&lt;span class=&quot;timestamp&quot;&gt;[2019-08-14 Wed 18:38]&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;State “VERIFIED”   from “IN-PROGRESS” &lt;span class=&quot;timestamp-wrapper&quot;&gt;&lt;span class=&quot;timestamp&quot;&gt;[2019-08-14 Wed 18:38] &lt;/span&gt;&lt;/span&gt; &lt;br /&gt;
+now I started to verify this task!&lt;/li&gt;
+  &lt;li&gt;State “IN-PROGRESS” from “TODO”       &lt;span class=&quot;timestamp-wrapper&quot;&gt;&lt;span class=&quot;timestamp&quot;&gt;[2019-08-14 Wed 18:37]&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;State “TODO”       from “IN-PROGRESS” &lt;span class=&quot;timestamp-wrapper&quot;&gt;&lt;span class=&quot;timestamp&quot;&gt;[2019-08-14 Wed 18:37]&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;State “IN-PROGRESS” from “TODO”       &lt;span class=&quot;timestamp-wrapper&quot;&gt;&lt;span class=&quot;timestamp&quot;&gt;[2019-08-14 Wed 18:36] &lt;/span&gt;&lt;/span&gt; &lt;br /&gt;
+now I started to do it&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a id=&quot;org4b86b69&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;todo-finish-document&quot;&gt;TODO finish document&lt;/h2&gt;
+
+&lt;p&gt;&lt;a id=&quot;org4b66449&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;in-progress-test-my-work-item&quot;&gt;IN-PROGRESS test my work item&lt;/h2&gt;
+
+&lt;p&gt;&lt;a id=&quot;org3a61cfc&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;mike-check-out-something&quot;&gt;MIKE check-out something&lt;/h2&gt;
+
+&lt;p&gt;&lt;a id=&quot;org118ff77&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;my-habits&quot;&gt;My Habits&lt;/h1&gt;
+
+&lt;p&gt;&lt;a id=&quot;org9e5523c&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;h-todo-golf-execise&quot;&gt;H-TODO Golf Execise&lt;/h2&gt;
+
+&lt;p&gt;;SCHEDULED: &lt;span class=&quot;timestamp-wrapper&quot;&gt;&lt;span class=&quot;timestamp&quot;&gt;&amp;lt;2019-08-16 Fri 06:00 .+2d&amp;gt;&lt;/span&gt;&lt;/span&gt;
+;:PROPERTIES:
+;:LAST&lt;sub&gt;REPEAT&lt;/sub&gt;: &lt;span class=&quot;timestamp-wrapper&quot;&gt;&lt;span class=&quot;timestamp&quot;&gt;[2019-08-14 Wed 18:57]&lt;/span&gt;&lt;/span&gt;
+;:END:&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&quot;orgb2a1f82&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;h-todo-watching-movie&quot;&gt;H-TODO Watching Movie&lt;/h2&gt;</content><author><name>xroger88</name></author><summary type="html">Org Mode에 대한 이해</summary></entry></feed>
