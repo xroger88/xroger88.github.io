@@ -266,6 +266,50 @@
     </div>
   </div>
   
+  <div class="item">
+    <i class="large sticky note middle aligned icon"></i>
+    <div class="content">
+      <a href="/2020/03/17/tranducer.html" class="header"> Transducer 개념 이해 (Clojure 언어) </a>
+      <!-- <div class="description"> <h1>Understanding transducer in clojure</h1>
+<ul>
+  <li>참조: https://labs.uswitch.com/transducers-from-the-ground-up-the-essence/</li>
+</ul>
+<h1>Basics</h1>
+<ul>
+  <li>map, filter 와 같이 입력 스트림을 받아서 특정한 처리를 한 후 출력 스트림으로
+    반환하는 다양한 함수가 존재 한다. 이러한 함수들의 경우 입력을 접근하는 방식,
+    출력을 내어 주는 방식, 입력 요소에 대하여 출력 요소로 매핑하는 일련의 단계를
+    반복하는 루프 기능 등 본질적인 기능은 같으나 다르게 구현되어야 한다.</li>
+  <li>다르게 구현될 수 있는 부분은 (1) 입력되는 스트림/시퀀스/콜렉션으로 부터
+    하나의 구성요소(아이템)를 얻어서 추가적인 변환을 하는데 적용할 아이템
+    변환함수, (2) 누적된 출력값(스트림/시퀀스/콜렉션)과 변환된 입력값을 인자로
+    받아서 출력값을 재구성하는 리듀스함수 등으로 추상화될 수 있다.</li>
+  <li>예들들면, 클로저 라이브러리에서 제공하는 컬렉션 및 스트림 처리 함수들 cat, mapcat,
+    remove, take, take-while, take-nth, drop, drop-while, replace, partition-by,
+    partition-all, keep-indexed, map-indexed, distint, interpose, dedupe,
+    random-sample, &#8230; 등 이 모든 함수들에 대하여 transport(stream)/sequence/collection
+    타입에 따라서 같은 함수를 매번 다르게 구현을 해야 하는냐? 한번 구현하여 여러
+    군데에서 사용할 수는 없을까? 이 질문에 대한 해결책이 transduer이다.</li>
+  <li>transduer(translating+reducing)는 어떤 동작의 본질과 연속된 입력과 처리, 출력의 흐름을 분리하여
+    입력, 처리, 출력으르 구성된 루프(or 이터레이션/리커전) 구조를 기반으로 본질에
+    해당하는 동작을 수행하도록 하는 패턴을 추상화한 것이다. 여기서 입력은 입력
+    스트림/시퀀스/콜렉션에서 입력 아이템을 하나씩 접근하는 것을 의미하고, 처리란
+    (1) 입력 아이템에 대하여 transforming function를 적용하여 변환된 값을 만드는
+    부분과 (2) 지금까지 누적된 결과값과 변환된 값을 적용하여 새로운 누적 결과값을
+    만드는 reducing function을 적용하는 부분을 의미한다. 출력은 처리의
+    결과값을 출력 스트림/시퀀스/콜렉션에 반영하는 것을 의미한다. 이 모든 과정은
+    reduce 함수가 가지는 기본 기능을 확장하여 구현될 수 있다.</li>
+</ul>
+<pre class="src" lang="clojure">
+<figure class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="nb">reduce</span><span class="w"> </span><span class="p">[</span><span class="n">f</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="n">coll</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">not=</span><span class="w"> </span><span class="o">&amp;#</span><span class="mi">39</span><span class="c1">;() coll)</span><span class="w">
+    </span><span class="p">(</span><span class="nb">reduce</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">(</span><span class="nf">f</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="n">coll</span><span class="p">))</span><span class="w"> </span><span class="p">(</span><span class="nb">rest</span><span class="w"> </span><span class="n">coll</span><span class="p">))</span><span class="w">
+    </span><span class="n">result</span><span class="p">))</span></code></pre></figure></div> -->
+      <div class="description"> 클로저 언어에서 제공하는 트랜스듀서(transducer)에 대한 이해 및 활용</div>
+      <div class="description"> Created at 17 Mar 2020 </div>
+    </div>
+  </div>
+  
 </div>
 
     </div>
