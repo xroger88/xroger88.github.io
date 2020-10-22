@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-10-22T17:20:57+09:00</updated><id>/feed.xml</id><entry><title type="html">다형성(Polymorphism)에 대한 이해 (Clojure 언어)</title><link href="/2020/04/20/polymorphism.html" rel="alternate" type="text/html" title="다형성(Polymorphism)에 대한 이해 (Clojure 언어)" /><published>2020-04-20T00:00:00+09:00</published><updated>2020-04-20T00:00:00+09:00</updated><id>/2020/04/20/polymorphism</id><content type="html" xml:base="/2020/04/20/polymorphism.html">&lt;h1&gt;Basic References&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-10-22T20:02:12+09:00</updated><id>/feed.xml</id><entry><title type="html">다형성(Polymorphism)에 대한 이해 (Clojure 언어)</title><link href="/2020/04/20/polymorphism.html" rel="alternate" type="text/html" title="다형성(Polymorphism)에 대한 이해 (Clojure 언어)" /><published>2020-04-20T00:00:00+09:00</published><updated>2020-04-20T00:00:00+09:00</updated><id>/2020/04/20/polymorphism</id><content type="html" xml:base="/2020/04/20/polymorphism.html">&lt;h1&gt;Basic References&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.braveclojure.com/introduction/&quot;&gt;CLOJURE for the BRAVE and TRUE&lt;/a&gt; (2015년) authored by Daniel Higginbotham :
     클로저 개발에 꼭 필요한 것들을 쉽게 자세히 설명해 주는 책! (필독 강추)&lt;/li&gt;
@@ -610,4 +610,277 @@
   &lt;li&gt;The content of this post is inspired by a book by the same author of this
     article. For additional information and extended examples, please have a look
     Clojure Standard Library: an Annotated Guide.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>xroger88</name></author><category term="transduer" /><category term="clojure" /><summary type="html">Understanding transducer in clojure 참조: https://labs.uswitch.com/transducers-from-the-ground-up-the-essence/ Basics map, filter 와 같이 입력 스트림을 받아서 특정한 처리를 한 후 출력 스트림으로 반환하는 다양한 함수가 존재 한다. 이러한 함수들의 경우 입력을 접근하는 방식, 출력을 내어 주는 방식, 입력 요소에 대하여 출력 요소로 매핑하는 일련의 단계를 반복하는 루프 기능 등 본질적인 기능은 같으나 다르게 구현되어야 한다. 다르게 구현될 수 있는 부분은 (1) 입력되는 스트림/시퀀스/콜렉션으로 부터 하나의 구성요소(아이템)를 얻어서 추가적인 변환을 하는데 적용할 아이템 변환함수, (2) 누적된 출력값(스트림/시퀀스/콜렉션)과 변환된 입력값을 인자로 받아서 출력값을 재구성하는 리듀스함수 등으로 추상화될 수 있다. 예들들면, 클로저 라이브러리에서 제공하는 컬렉션 및 스트림 처리 함수들 cat, mapcat, remove, take, take-while, take-nth, drop, drop-while, replace, partition-by, partition-all, keep-indexed, map-indexed, distint, interpose, dedupe, random-sample, &amp;#8230; 등 이 모든 함수들에 대하여 transport(stream)/sequence/collection 타입에 따라서 같은 함수를 매번 다르게 구현을 해야 하는냐? 한번 구현하여 여러 군데에서 사용할 수는 없을까? 이 질문에 대한 해결책이 transduer이다. transduer(translating+reducing)는 어떤 동작의 본질과 연속된 입력과 처리, 출력의 흐름을 분리하여 입력, 처리, 출력으르 구성된 루프(or 이터레이션/리커전) 구조를 기반으로 본질에 해당하는 동작을 수행하도록 하는 패턴을 추상화한 것이다. 여기서 입력은 입력 스트림/시퀀스/콜렉션에서 입력 아이템을 하나씩 접근하는 것을 의미하고, 처리란 (1) 입력 아이템에 대하여 transforming function를 적용하여 변환된 값을 만드는 부분과 (2) 지금까지 누적된 결과값과 변환된 값을 적용하여 새로운 누적 결과값을 만드는 reducing function을 적용하는 부분을 의미한다. 출력은 처리의 결과값을 출력 스트림/시퀀스/콜렉션에 반영하는 것을 의미한다. 이 모든 과정은 reduce 함수가 가지는 기본 기능을 확장하여 구현될 수 있다. (defn reduce [f result coll] (if (not= &amp;amp;#39;() coll) (reduce f (f result (first coll)) (rest coll)) result))</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>xroger88</name></author><category term="transduer" /><category term="clojure" /><summary type="html">Understanding transducer in clojure 참조: https://labs.uswitch.com/transducers-from-the-ground-up-the-essence/ Basics map, filter 와 같이 입력 스트림을 받아서 특정한 처리를 한 후 출력 스트림으로 반환하는 다양한 함수가 존재 한다. 이러한 함수들의 경우 입력을 접근하는 방식, 출력을 내어 주는 방식, 입력 요소에 대하여 출력 요소로 매핑하는 일련의 단계를 반복하는 루프 기능 등 본질적인 기능은 같으나 다르게 구현되어야 한다. 다르게 구현될 수 있는 부분은 (1) 입력되는 스트림/시퀀스/콜렉션으로 부터 하나의 구성요소(아이템)를 얻어서 추가적인 변환을 하는데 적용할 아이템 변환함수, (2) 누적된 출력값(스트림/시퀀스/콜렉션)과 변환된 입력값을 인자로 받아서 출력값을 재구성하는 리듀스함수 등으로 추상화될 수 있다. 예들들면, 클로저 라이브러리에서 제공하는 컬렉션 및 스트림 처리 함수들 cat, mapcat, remove, take, take-while, take-nth, drop, drop-while, replace, partition-by, partition-all, keep-indexed, map-indexed, distint, interpose, dedupe, random-sample, &amp;#8230; 등 이 모든 함수들에 대하여 transport(stream)/sequence/collection 타입에 따라서 같은 함수를 매번 다르게 구현을 해야 하는냐? 한번 구현하여 여러 군데에서 사용할 수는 없을까? 이 질문에 대한 해결책이 transduer이다. transduer(translating+reducing)는 어떤 동작의 본질과 연속된 입력과 처리, 출력의 흐름을 분리하여 입력, 처리, 출력으르 구성된 루프(or 이터레이션/리커전) 구조를 기반으로 본질에 해당하는 동작을 수행하도록 하는 패턴을 추상화한 것이다. 여기서 입력은 입력 스트림/시퀀스/콜렉션에서 입력 아이템을 하나씩 접근하는 것을 의미하고, 처리란 (1) 입력 아이템에 대하여 transforming function를 적용하여 변환된 값을 만드는 부분과 (2) 지금까지 누적된 결과값과 변환된 값을 적용하여 새로운 누적 결과값을 만드는 reducing function을 적용하는 부분을 의미한다. 출력은 처리의 결과값을 출력 스트림/시퀀스/콜렉션에 반영하는 것을 의미한다. 이 모든 과정은 reduce 함수가 가지는 기본 기능을 확장하여 구현될 수 있다. (defn reduce [f result coll] (if (not= &amp;amp;#39;() coll) (reduce f (f result (first coll)) (rest coll)) result))</summary></entry><entry><title type="html">Clojure Lang</title><link href="/2020/02/26/clojure-lang.html" rel="alternate" type="text/html" title="Clojure Lang" /><published>2020-02-26T00:00:00+09:00</published><updated>2020-02-26T00:00:00+09:00</updated><id>/2020/02/26/clojure-lang</id><content type="html" xml:base="/2020/02/26/clojure-lang.html">&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;What is Clojure? Clojure is a programming language created by Rich Hickey, that was released in 2007.&lt;/li&gt;
+  &lt;li&gt;It is: A dialect of Lisp &lt;code&gt;Powerful with many, many brackets Hosted on the Java Virtual Machine (JVM = Parasitises Java’s stability/performance and can use Java libraries Dynamically compiled =Faster than scripting languages. Turned into Java byte code for the JVM An impure functional programming language&lt;/code&gt; Does not enforce the functional paradigm Aimed at Concurrency / Asynchronous Programming Currently at version 1.7, see more &lt;a href=&quot;https://medium.com/@FunctionalWorks/from-0-to-clojure-in-540-seconds-7ce6842f57f9&quot;&gt;article1&lt;/a&gt; &lt;a href=&quot;https://medium.com/@val.vvalval/what-datomic-brings-to-businesses-e2238a568e1c&quot;&gt;article2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Basic References&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;Programming Clojure&lt;/b&gt; authored by Stuart Halloway : 기본 입문서&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.braveclojure.com/introduction/&quot;&gt;CLOJURE for the BRAVE and TRUE&lt;/a&gt; : 클로저 개발에 필요한 것들을 쉽게 자세히 설명해 주는 책! (필독 강추)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Build &amp;amp; Debugging Tools&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Leiningen&lt;/li&gt;
+  &lt;li&gt;Cider in emacs&lt;/li&gt;
+  &lt;li&gt;lein-figwheel &amp;amp; figwheel-main for clojurescript&lt;/li&gt;
+  &lt;li&gt;rebel-readline&lt;/li&gt;
+  &lt;li&gt;tools.deps - deps.edn&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Language Extension Libraries&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Monad (algo.monad)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Asynchronous Abstraction Libraries&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Manifold
+    &lt;ul&gt;
+      &lt;li&gt;high level abstractions for asynchronous things in Clojure : &lt;a href=&quot;https://medium.com/@functionalhuman/a-tour-of-manifold-an-easy-to-use-library-of-building-blocks-for-asynchronous-programming-f4bb5d9c6ba9&quot;&gt;a tour of manifold an easy to use library of building blocks for asynchronous programming&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;Manifold.deferred - Methods for creating, transforming, and interacting with asynchronous values.&lt;/li&gt;
+      &lt;li&gt;Manifold.streams - Manifold’s streams provide mechanisms for asynchronous puts and takes, timeouts, and backpressure. They are compatible with Java’s BlockingQueues, Clojure's lazy sequences, and core.async's channels. Methods for converting to and from each are provided.&lt;/li&gt;
+      &lt;li&gt;Manifold.bus - Manifold also provides a simple event bus that can be used for pub/sub communication.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Promesa&lt;/li&gt;
+  &lt;li&gt;Porsas (metosin) - tools for precompiling the functions to convert database results into Clojure values. This enables basically Java-fast database queries using idiomatic Clojure.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Application Framework &amp;amp; Libraries&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ring (HTTP support in clojure)
+    &lt;ul&gt;
+      &lt;li&gt;wrap-params (parsing params)&lt;/li&gt;
+      &lt;li&gt;wrap-reload (for development)&lt;/li&gt;
+      &lt;li&gt;wrap-resource and wrap-file-info (static files)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Route match and dispatch, Restful Application Libraries
+    &lt;ul&gt;
+      &lt;li&gt;Compojure&lt;/li&gt;
+      &lt;li&gt;Bidi (JUXT)&lt;/li&gt;
+      &lt;li&gt;Compojure-api&lt;/li&gt;
+      &lt;li&gt;Liberator - &lt;a href=&quot;https://github.com/clojure-liberator/liberator&quot;&gt;clojure-liberator&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;Reitit&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Re-frame (event/effect/subscription, application-state management)&lt;/li&gt;
+  &lt;li&gt;Reagent (react-like component render, data -&amp;gt; hiccup conversion)&lt;/li&gt;
+  &lt;li&gt;Hiccup - HTML representation in clojure&lt;/li&gt;
+  &lt;li&gt;Duck Framework for Server Application Dev - &lt;a href=&quot;https://github.com/duct-framework/duct&quot;&gt;github&lt;/a&gt;
+    Duct is a highly modular framework for building server-side applications in Clojure using data-driven architecture. It is similar in scope to Arachne, and is based on Integrant. Duct builds applications around an immutable configuration that acts as a structural blueprint. The configuration can be manipulated and queried to produce sophisticated behavior.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/duct-framework/docs/blob/master/GUIDE.rst&quot;&gt;Guide doc&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;see a lot of modules in &lt;a href=&quot;https://github.com/duct-framework/duct/wiki/Modules&quot;&gt;github&lt;/a&gt;
+        Clojure/Datomic migrations library branched from rkneufeld/conformity &lt;a href=&quot;https://github.com/magnetcoop/stork&quot;&gt;see this&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Database as a value&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Datomic - immutable, single writer model (reified transaction): &lt;a href=&quot;https://www.datomic.com&quot;&gt;datomic home&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Crux - document oriendted bitemporality (tx-time, valid-time), unbundled database : &lt;a href=&quot;https://opencrux.com&quot;&gt;crux home&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Crux Console Implementation - modify it as you want&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;SQL for Clojure(Script)&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;clojure.java.jdbc, jdbc.next - see &lt;a href=&quot;https://github.com/seancorfield/next-jdbc&quot;&gt;github&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;how to connect mssql&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&quot;src&quot; lang=&quot;clojure&quot;&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;#&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;39&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;;[next.jdbc :as jdbc])&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:dbtype&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;;mssql&amp;amp;quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:dbname&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;;database-name&amp;amp;quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:host&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;;host&amp;amp;quot; ;;optional&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:port&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;;port&amp;amp;quot; ;;optional&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:user&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;;sql-authentication-user-name&amp;amp;quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:password&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;;password&amp;amp;quot;})&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;con&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;jdbc/get-connection&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;jdbc/execute!&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;con&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;;select * from sys.objects  where type = &amp;amp;#39;U&amp;amp;#39;&amp;amp;quot;])&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;; leiningen configuration&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:dependencies&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seancorfield/next.jdbc&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;;1.0.13&amp;amp;quot;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+               &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com.microsoft.sqlserver/mssql-jdbc&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;;7.4.1.jre11&amp;amp;quot;]]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;db spec -&amp;gt; db source -&amp;gt; db connection&lt;/li&gt;
+  &lt;li&gt;Primitive SQL APIs: plan, execute!, execute-one!&lt;/li&gt;
+  &lt;li&gt;Friendly SQL Functions: insert!, insert-multi!, query, update!, delete!
+    If you need more expressiveness, consider one of the following libraries to build SQL/parameter vectors, or run queries:&lt;/li&gt;
+  &lt;li&gt;HoneySQL &amp;#8211; a composable DSL for creating SQL/parameter vectors from Clojure data structures&lt;/li&gt;
+  &lt;li&gt;seql &amp;#8211; a simplified EQL-inspired query language, built on next.jdbc (as of release 0.1.6)&lt;/li&gt;
+  &lt;li&gt;SQLingvo &amp;#8211; a composable DSL for creating SQL/parameter vectors&lt;/li&gt;
+  &lt;li&gt;Walkable &amp;#8211; full EQL query language support for creating SQL/parameter vectors&lt;/li&gt;
+  &lt;li&gt;HugSQL &amp;#8211; If you prefer to write your SQL separately from your code, take a look at HugSQL&lt;/li&gt;
+  &lt;li&gt;RagTime - &lt;a href=&quot;https://github.com/weavejester/ragtime&quot;&gt;see this&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Ragtime is a Clojure library for migrating structured data in a way that's database independent. It defines a common interface for expressing migrations, much like Ring defines a common interface for expressing web applications. Ragtime needs three pieces of data to work: migratable data store, an ordered sequence of migrations,strategy on how to deal with conflicts&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;HugSQL&lt;/li&gt;
+  &lt;li&gt;HoneySQL&lt;/li&gt;
+  &lt;li&gt;Walkable&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Reloaded Workflow [Application State Management]&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Introduction
+    &lt;ul&gt;
+      &lt;li&gt;The reloaded workflow uses components that can be started or stopped, arranged together into a system. During development, the system is started in a running REPL. After source files are changed, the system is stopped, the source files reloaded, and the system started once more. This can be put into a single command or even attached to a shortcut. A component could include stuff like reading configuration database connection running a Jetty server A short list of libraries offering support for this approach: Component &lt;a href=&quot;https://github.com/stuartsierra/component&quot;&gt;see this&lt;/a&gt; [Excerpted from Stuartssierra's component github site]&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;A component is a collection of functions or procedures which share some runtime
+    state. Some examples of components:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Database access: query and insert fucntions sharing a database connection&lt;/li&gt;
+    &lt;li&gt;External API service: functions to send receive data sharing an HTTP
+      connection pool&lt;/li&gt;
+    &lt;li&gt;Web server: functions to handle different routes sharing all the runtime state
+      of the web application, such as a session store&lt;/li&gt;
+    &lt;li&gt;In-memory cache: functions to get and set data in a shared mutable reference
+      such as a Clojure Atom or Ref&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;p&gt;Commponents are intended to help manage stateful resources within a function paradigm.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+  &lt;li&gt;Integrant &lt;a href=&quot;https://github.com/weavejester/integrant&quot;&gt;see this&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Integrant is a Clojure (and ClojureScript) micro-framework for building applications with data-driven architecture. It can be thought of as an alternative to Component or Mount, and was inspired by Arachne and through work on Duct. Rationale: Integrant was built as a reaction to fix some perceived weaknesses with Component. In Component, systems are created programmatically. Constructor functions are used to build records, which are then assembled into systems. In Integrant, systems are created from a configuration data structure, typically loaded from an edn resource. The architecture of the application is defined through data, rather than code. In Component, only records or maps may have dependencies. Anything else you might want to have dependencies, like a function, needs to be wrapped in a record. In Integrant, anything can be dependent on anything else. The dependencies are resolved from the configuration before it's initialized into a system.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Mount &lt;a href=&quot;https://github.com/tolitius/mount&quot;&gt;see this&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Sample dev application in the repository is very useful to understand the function of mount's component runtime dependency management. You can start, stop, reset the workflow of application starting jetty web server, then connecting a database, initializing application's state, then nrepl server.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Mount-Lite &lt;a href=&quot;https://github.com/ekroon/mount-lite&quot;&gt;see this&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Not sure this is useful because this is one-man project, no new features compared with the orginal mount project.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Data visualization Library &amp;amp; Tool&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;plotly.js &lt;a href=&quot;https://github.com/plotly/plotly.js&quot;&gt;see this&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Logging in Clojure https://spin.atomicobject.com/2015/05/11/clojure-logging/&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Use clojure.tools.logging : This library uses the following underlying java logging library in order of preference:
+    &lt;ul&gt;
+      &lt;li&gt;slf4j : This is not a loggin library, it's actually an API meant to wrap a variety of other logging libraries such as log4j, logback.&lt;/li&gt;
+      &lt;li&gt;commons-logging&lt;/li&gt;
+      &lt;li&gt;log4j : out of date, replaced by logback &amp;#8230;&lt;/li&gt;
+      &lt;li&gt;java.util.logging : simple log with no complexity but weak functionity&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Use clojure.tools.logging with logback (best choice)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&quot;src&quot; lang=&quot;clojure&quot;&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:dependencies&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org.clojure/tools.logging&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;;0.3.1&amp;amp;quot;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;; No need to specify slf4j-api, it’s required by logback&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ch.qos.logback/logback-classic&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;quot&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;;1.1.3&amp;amp;quot;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;Logback configuration using resources/logback.xml : An example of logback.xml you can set a log level for root or sub namespaces, and log format:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&quot;src&quot; lang=&quot;xml&quot;&gt;
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;configuration&amp;gt;
+  &amp;lt;appender name=&amp;quot;STDOUT&amp;quot; class=&amp;quot;ch.qos.logback.core.ConsoleAppender&amp;quot;&amp;gt;
+    &amp;lt;!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default --&amp;gt;
+    &amp;lt;encoder&amp;gt;
+      &amp;lt;pattern&amp;gt;%d{ISO8601,Europe/London} [%thread] %-5level %logger{36} - %msg%n&amp;lt;/pattern&amp;gt;
+    &amp;lt;/encoder&amp;gt;
+  &amp;lt;/appender&amp;gt;
+
+  &amp;lt;!-- Show debug logs that originate from our namespace --&amp;gt;
+  &amp;lt;property name=&amp;quot;level&amp;quot; value=&amp;quot;DEBUG&amp;quot;/&amp;gt;
+  &amp;lt;logger name=&amp;quot;nsp.core&amp;quot; level=&amp;quot;${level}&amp;quot;/&amp;gt;
+  &amp;lt;logger name=&amp;quot;org.eclipse.jetty.server&amp;quot; level=&amp;quot;WARN&amp;quot;/&amp;gt;
+  &amp;lt;logger name=&amp;quot;org.eclipse.jetty.util.log&amp;quot; level=&amp;quot;WARN&amp;quot;/&amp;gt;
+
+  &amp;lt;root level=&amp;quot;INFO&amp;quot;&amp;gt;
+    &amp;lt;appender-ref ref=&amp;quot;STDOUT&amp;quot;/&amp;gt;
+  &amp;lt;/root&amp;gt;
+&amp;lt;/configuration&amp;gt;
+&lt;/pre&gt;
+&lt;h1&gt;clojure cljfx for desktop applications&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;game engine can be written by clojure &lt;a href=&quot;https://defold.com/tutorials/getting-started/&quot;&gt;see this&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Reveal - read eval visualization for clojure &lt;a href=&quot;https://github.com/vlaaad/reveal&quot;&gt;see this&lt;/a&gt; &amp;#8211;&amp;gt; advanced visual REPLs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;E1: 데이터 기반 어플리케이션 개발에 대한 가능성 탐색&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;React + Redux : React Component and Flux Architecture 이해&lt;/li&gt;
+  &lt;li&gt;Fulcro : co-located query and ident, initial-state based on application database (state), react-based stateful component&lt;/li&gt;
+  &lt;li&gt;Pathom : Parser for EQL(EDN Query Language) supporting datomic pull-like query, from Om.next concept&lt;/li&gt;
+  &lt;li&gt;Walkable : a serious way to fetch data from SQL for Clojure: Datomic pull (Graphql-ish) syntax, Clojure flavered filtering and more&lt;/li&gt;
+  &lt;li&gt;How about application potential built-on Fulcro + Pathom + Walkable?
+    &lt;ul&gt;
+      &lt;li&gt;All clojure(script) based - unified language across client and server&lt;/li&gt;
+      &lt;li&gt;EQL based data communication - simple code, less code&lt;/li&gt;
+      &lt;li&gt;Easy migration from SQL to Datomic or others - seamless, incremental migration path is possible&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;E2: Migration from SQL to Datomic&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;From Postgres to Datomic &lt;a href=&quot;https://grishaev.me/en/pg-to-datomic/&quot;&gt;see this&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Migration Common Interface for SQL &lt;a href=&quot;https://github.com/weavejester/ragtime&quot;&gt;see this&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;HoneySQL and HoneyEQL
+    &lt;ul&gt;
+      &lt;li&gt;HoneySQL transforms clojure data structures into SQL format so you don't need to write SQL manually. Also using HoneySQL makes you program a complex SQL programatically.&lt;/li&gt;
+      &lt;li&gt;HoneyEQL parses EQL and gets output from SQL DB. First sql-db-metadata (databases, schemas, tables, columns) which can be retrieved from JDBC connection is converted to honey-eql-metadata (entities, attributes, primary keys, foreign keys, one-to-one relation, etc), then an eql-node results in some relevant data in SQL DB if some attributes in honey-eql-metadata are there matched for the eql-node. As of now, PostgresSQL and MySQL only are supported. For me, Microsoft SQL Server needs to be supported so I will make it.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Who did a great work on clojure development, specially thanks mentioned in the community:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Rich Hickey &amp;amp; Cognitect team for Clojure and Datomic&lt;/li&gt;
+  &lt;li&gt;David Nolen for bringing many fresh ideas to the community including om.next&lt;/li&gt;
+  &lt;li&gt;James Reeves for Duct framework. The best development experience I've ever had&lt;/li&gt;
+  &lt;li&gt;Tony Kay for his heroic work on fulcro that showed me how great things can be done&lt;/li&gt;
+  &lt;li&gt;Wilker Lucio for pathom and being very supportive&lt;/li&gt;
+  &lt;li&gt;Sean Corfield for clojure.java.jdbc which we all use extensively&lt;/li&gt;
+  &lt;li&gt;Bozhidar Batsov and CIDER team!!!&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>xroger88</name></author><category term="clojure" /><category term="language" /><summary type="html">Introduction What is Clojure? Clojure is a programming language created by Rich Hickey, that was released in 2007. It is: A dialect of Lisp Powerful with many, many brackets Hosted on the Java Virtual Machine (JVM = Parasitises Java’s stability/performance and can use Java libraries Dynamically compiled =Faster than scripting languages. Turned into Java byte code for the JVM An impure functional programming language Does not enforce the functional paradigm Aimed at Concurrency / Asynchronous Programming Currently at version 1.7, see more article1 article2 Basic References Programming Clojure authored by Stuart Halloway : 기본 입문서 CLOJURE for the BRAVE and TRUE : 클로저 개발에 필요한 것들을 쉽게 자세히 설명해 주는 책! (필독 강추) Build &amp;amp; Debugging Tools Leiningen Cider in emacs lein-figwheel &amp;amp; figwheel-main for clojurescript rebel-readline tools.deps - deps.edn Language Extension Libraries Monad (algo.monad) Asynchronous Abstraction Libraries Manifold high level abstractions for asynchronous things in Clojure : a tour of manifold an easy to use library of building blocks for asynchronous programming Manifold.deferred - Methods for creating, transforming, and interacting with asynchronous values. Manifold.streams - Manifold’s streams provide mechanisms for asynchronous puts and takes, timeouts, and backpressure. They are compatible with Java’s BlockingQueues, Clojure's lazy sequences, and core.async's channels. Methods for converting to and from each are provided. Manifold.bus - Manifold also provides a simple event bus that can be used for pub/sub communication. Promesa Porsas (metosin) - tools for precompiling the functions to convert database results into Clojure values. This enables basically Java-fast database queries using idiomatic Clojure. Application Framework &amp;amp; Libraries Ring (HTTP support in clojure) wrap-params (parsing params) wrap-reload (for development) wrap-resource and wrap-file-info (static files) Route match and dispatch, Restful Application Libraries Compojure Bidi (JUXT) Compojure-api Liberator - clojure-liberator Reitit Re-frame (event/effect/subscription, application-state management) Reagent (react-like component render, data -&amp;gt; hiccup conversion) Hiccup - HTML representation in clojure Duck Framework for Server Application Dev - github Duct is a highly modular framework for building server-side applications in Clojure using data-driven architecture. It is similar in scope to Arachne, and is based on Integrant. Duct builds applications around an immutable configuration that acts as a structural blueprint. The configuration can be manipulated and queried to produce sophisticated behavior. Guide doc see a lot of modules in github Clojure/Datomic migrations library branched from rkneufeld/conformity see this Database as a value Datomic - immutable, single writer model (reified transaction): datomic home Crux - document oriendted bitemporality (tx-time, valid-time), unbundled database : crux home Crux Console Implementation - modify it as you want SQL for Clojure(Script) clojure.java.jdbc, jdbc.next - see github how to connect mssql (require &amp;amp;#39;[next.jdbc :as jdbc]) (def db {:dbtype &amp;amp;quot;mssql&amp;amp;quot; :dbname &amp;amp;quot;database-name&amp;amp;quot; :host &amp;amp;quot;host&amp;amp;quot; ;;optional :port &amp;amp;quot;port&amp;amp;quot; ;;optional :user &amp;amp;quot;sql-authentication-user-name&amp;amp;quot; :password &amp;amp;quot;password&amp;amp;quot;}) (def con (jdbc/get-connection db)) (jdbc/execute! con [&amp;amp;quot;select * from sys.objects where type = &amp;amp;#39;U&amp;amp;#39;&amp;amp;quot;])</summary></entry><entry><title type="html">Prog Lang</title><link href="/2020/01/23/prog-lang.html" rel="alternate" type="text/html" title="Prog Lang" /><published>2020-01-23T00:00:00+09:00</published><updated>2020-01-23T00:00:00+09:00</updated><id>/2020/01/23/prog-lang</id><content type="html" xml:base="/2020/01/23/prog-lang.html">&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;A peronsal study on programming lanaguage features such as procedual vs. declative,
+  static typing vs. dyanamic typing, strong typing vs. weak typing,
+  obejct-oriendted vs. functional programming and so on.&lt;/p&gt;
+&lt;h1&gt;[Book] Languages mentioned in the book named &amp;#8220;Seven Languages in Seven Weeks&amp;#8221; authored by Bruce A. Tate&lt;/h1&gt;
+&lt;h2&gt;Ruby&lt;/h2&gt;
+&lt;h2&gt;Io&lt;/h2&gt;
+&lt;h2&gt;Prolog&lt;/h2&gt;
+&lt;h2&gt;Scala&lt;/h2&gt;
+&lt;h2&gt;Erlang&lt;/h2&gt;
+&lt;h2&gt;Clojure&lt;/h2&gt;
+&lt;h2&gt;Haskell&lt;/h2&gt;
+&lt;h1&gt;[Book] Land of Lisp - Learn to Program in Lisp, One game at a Time! authord by Conrad Barski&lt;/h1&gt;
+&lt;p&gt;This book helps me to understand the basic concept of Lisp and details on Common
+  Lisp (CLISP). It shows the power of Lisp language by taking an example of
+  making a simple game.&lt;/p&gt;
+&lt;h1&gt;[Video] Interested on Clojure CONJ 2019&lt;/h1&gt;
+&lt;h2&gt;Sherlock Holmes, Consulting Developer - Stuart Halloway&lt;/h2&gt;
+&lt;p&gt;https://www.youtube.com/watch?v=OUZZKtypink&amp;amp;list=PLZdCLR02grLqSy15ALLAZDU6LGpAJDrAQ&amp;amp;index=12&amp;amp;t=0s&lt;/p&gt;
+&lt;h2&gt;The Hitchhikers Guide to Multiparadigm Programming - Ariel Ortiz&lt;/h2&gt;
+&lt;p&gt;https://www.youtube.com/watch?v=GvJm-eJ5o18&amp;amp;list=PLZdCLR02grLqSy15ALLAZDU6LGpAJDrAQ&amp;amp;index=3&amp;amp;t=0s&lt;/p&gt;</content><author><name>xroger88</name></author><category term="programming" /><category term="language" /><summary type="html">Introduction A peronsal study on programming lanaguage features such as procedual vs. declative, static typing vs. dyanamic typing, strong typing vs. weak typing, obejct-oriendted vs. functional programming and so on. [Book] Languages mentioned in the book named &amp;#8220;Seven Languages in Seven Weeks&amp;#8221; authored by Bruce A. Tate Ruby Io Prolog Scala Erlang Clojure Haskell [Book] Land of Lisp - Learn to Program in Lisp, One game at a Time! authord by Conrad Barski This book helps me to understand the basic concept of Lisp and details on Common Lisp (CLISP). It shows the power of Lisp language by taking an example of making a simple game. [Video] Interested on Clojure CONJ 2019 Sherlock Holmes, Consulting Developer - Stuart Halloway https://www.youtube.com/watch?v=OUZZKtypink&amp;amp;list=PLZdCLR02grLqSy15ALLAZDU6LGpAJDrAQ&amp;amp;index=12&amp;amp;t=0s The Hitchhikers Guide to Multiparadigm Programming - Ariel Ortiz https://www.youtube.com/watch?v=GvJm-eJ5o18&amp;amp;list=PLZdCLR02grLqSy15ALLAZDU6LGpAJDrAQ&amp;amp;index=3&amp;amp;t=0s</summary></entry><entry><title type="html">Emacs 활용</title><link href="/tool/usage/2020/01/10/emacs.html" rel="alternate" type="text/html" title="Emacs 활용" /><published>2020-01-10T00:00:00+09:00</published><updated>2020-01-10T00:00:00+09:00</updated><id>/tool/usage/2020/01/10/emacs</id><content type="html" xml:base="/tool/usage/2020/01/10/emacs.html">&lt;h1&gt;Doom Emacs&lt;/h1&gt;
+&lt;h2&gt;&lt;a href=&quot;https://noelwelsh.com/posts/2019-01-10-doom-emacs.html&quot;&gt;Doom Emacs Workflows by noel welsh&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;This is a good reference to get you familiar with basic workflow commands in
+  Doom Emacs. Please check this first when you don't know how to use
+  something.&lt;/p&gt;
+&lt;h2&gt;In case of that SPC / p is not working to search files having some text&lt;/h2&gt;
+&lt;p&gt;You need to install ripgrep (or silver search) so emacs can use rg, ag commands.
+  In MacOS, just do &amp;#8220;brew install ripgrep the_silver_searcher&amp;#8221;.&lt;/p&gt;
+&lt;h2&gt;Helm and Ivy : a search engine to find out texts and complete text/code_keywords/commands for helping the edior to select a complete one.&lt;/h2&gt;
+&lt;p&gt;There are lot of mentions among emacs user around community online, which one is
+  better. Each one has pros and cons so you need to choose or use both
+  appropriately for your purpose. Ivy is more modularized than Helm, you see Ivy itself,
+  and Counsel which wraps the common emacs search commands, Swiper which &amp;#8230;&lt;/p&gt;
+&lt;h1&gt;How-to elisp Programming&lt;/h1&gt;
+&lt;h2&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/eintr.html&quot;&gt;An Introduction to Programming in Emacs Lisp&lt;/a&gt;&lt;/h2&gt;</content><author><name>xroger88</name></author><category term="tool" /><category term="usage" /><category term="ide" /><category term="emacs" /><category term="doom" /><summary type="html">Doom Emacs Doom Emacs Workflows by noel welsh This is a good reference to get you familiar with basic workflow commands in Doom Emacs. Please check this first when you don't know how to use something. In case of that SPC / p is not working to search files having some text You need to install ripgrep (or silver search) so emacs can use rg, ag commands. In MacOS, just do &amp;#8220;brew install ripgrep the_silver_searcher&amp;#8221;. Helm and Ivy : a search engine to find out texts and complete text/code_keywords/commands for helping the edior to select a complete one. There are lot of mentions among emacs user around community online, which one is better. Each one has pros and cons so you need to choose or use both appropriately for your purpose. Ivy is more modularized than Helm, you see Ivy itself, and Counsel which wraps the common emacs search commands, Swiper which &amp;#8230; How-to elisp Programming An Introduction to Programming in Emacs Lisp</summary></entry></feed>

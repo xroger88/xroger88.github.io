@@ -424,6 +424,160 @@
     </div>
   </div>
   
+  <div class="item">
+    <i class="large sticky note middle aligned icon"></i>
+    <div class="content">
+      <a href="/2020/02/26/clojure-lang.html" class="header"> Clojure Lang </a>
+      <!-- <div class="description"> <h1>Introduction</h1>
+<ul>
+  <li>What is Clojure? Clojure is a programming language created by Rich Hickey, that was released in 2007.</li>
+  <li>It is: A dialect of Lisp <code>Powerful with many, many brackets Hosted on the Java Virtual Machine (JVM = Parasitises Java’s stability/performance and can use Java libraries Dynamically compiled =Faster than scripting languages. Turned into Java byte code for the JVM An impure functional programming language</code> Does not enforce the functional paradigm Aimed at Concurrency / Asynchronous Programming Currently at version 1.7, see more <a href="https://medium.com/@FunctionalWorks/from-0-to-clojure-in-540-seconds-7ce6842f57f9">article1</a> <a href="https://medium.com/@val.vvalval/what-datomic-brings-to-businesses-e2238a568e1c">article2</a></li>
+</ul>
+<h1>Basic References</h1>
+<ul>
+  <li><b>Programming Clojure</b> authored by Stuart Halloway : 기본 입문서</li>
+  <li><a href="https://www.braveclojure.com/introduction/">CLOJURE for the BRAVE and TRUE</a> : 클로저 개발에 필요한 것들을 쉽게 자세히 설명해 주는 책! (필독 강추)</li>
+</ul>
+<h1>Build &amp; Debugging Tools</h1>
+<ul>
+  <li>Leiningen</li>
+  <li>Cider in emacs</li>
+  <li>lein-figwheel &amp; figwheel-main for clojurescript</li>
+  <li>rebel-readline</li>
+  <li>tools.deps - deps.edn</li>
+</ul>
+<h1>Language Extension Libraries</h1>
+<ul>
+  <li>Monad (algo.monad)</li>
+</ul>
+<h1>Asynchronous Abstraction Libraries</h1>
+<ul>
+  <li>Manifold
+    <ul>
+      <li>high level abstractions for asynchronous things in Clojure : <a href="https://medium.com/@functionalhuman/a-tour-of-manifold-an-easy-to-use-library-of-building-blocks-for-asynchronous-programming-f4bb5d9c6ba9">a tour of manifold an easy to use library of building blocks for asynchronous programming</a></li>
+      <li>Manifold.deferred - Methods for creating, transforming, and interacting with asynchronous values.</li>
+      <li>Manifold.streams - Manifold’s streams provide mechanisms for asynchronous puts and takes, timeouts, and backpressure. They are compatible with Java’s BlockingQueues, Clojure's lazy sequences, and core.async's channels. Methods for converting to and from each are provided.</li>
+      <li>Manifold.bus - Manifold also provides a simple event bus that can be used for pub/sub communication.</li>
+    </ul>
+  </li>
+  <li>Promesa</li>
+  <li>Porsas (metosin) - tools for precompiling the functions to convert database results into Clojure values. This enables basically Java-fast database queries using idiomatic Clojure.</li>
+</ul>
+<h1>Application Framework &amp; Libraries</h1>
+<ul>
+  <li>Ring (HTTP support in clojure)
+    <ul>
+      <li>wrap-params (parsing params)</li>
+      <li>wrap-reload (for development)</li>
+      <li>wrap-resource and wrap-file-info (static files)</li>
+    </ul>
+  </li>
+  <li>Route match and dispatch, Restful Application Libraries
+    <ul>
+      <li>Compojure</li>
+      <li>Bidi (JUXT)</li>
+      <li>Compojure-api</li>
+      <li>Liberator - <a href="https://github.com/clojure-liberator/liberator">clojure-liberator</a></li>
+      <li>Reitit</li>
+    </ul>
+  </li>
+  <li>Re-frame (event/effect/subscription, application-state management)</li>
+  <li>Reagent (react-like component render, data -&gt; hiccup conversion)</li>
+  <li>Hiccup - HTML representation in clojure</li>
+  <li>Duck Framework for Server Application Dev - <a href="https://github.com/duct-framework/duct">github</a>
+    Duct is a highly modular framework for building server-side applications in Clojure using data-driven architecture. It is similar in scope to Arachne, and is based on Integrant. Duct builds applications around an immutable configuration that acts as a structural blueprint. The configuration can be manipulated and queried to produce sophisticated behavior.
+    <ul>
+      <li><a href="https://github.com/duct-framework/docs/blob/master/GUIDE.rst">Guide doc</a></li>
+      <li>see a lot of modules in <a href="https://github.com/duct-framework/duct/wiki/Modules">github</a>
+        Clojure/Datomic migrations library branched from rkneufeld/conformity <a href="https://github.com/magnetcoop/stork">see this</a></li>
+    </ul>
+  </li>
+</ul>
+<h1>Database as a value</h1>
+<ul>
+  <li>Datomic - immutable, single writer model (reified transaction): <a href="https://www.datomic.com">datomic home</a></li>
+  <li>Crux - document oriendted bitemporality (tx-time, valid-time), unbundled database : <a href="https://opencrux.com">crux home</a>
+    <ul>
+      <li>Crux Console Implementation - modify it as you want</li>
+    </ul>
+  </li>
+</ul>
+<h1>SQL for Clojure(Script)</h1>
+<ul>
+  <li>clojure.java.jdbc, jdbc.next - see <a href="https://github.com/seancorfield/next-jdbc">github</a></li>
+  <li>how to connect mssql</li>
+</ul>
+<pre class="src" lang="clojure">
+<figure class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="nf">require</span><span class="w"> </span><span class="o">&amp;#</span><span class="mi">39</span><span class="c1">;[next.jdbc :as jdbc])</span><span class="w">
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="p">{</span><span class="no">:dbtype</span><span class="w"> </span><span class="o">&amp;</span><span class="nb">quot</span><span class="c1">;mssql&amp;quot;</span><span class="w">
+         </span><span class="no">:dbname</span><span class="w"> </span><span class="o">&amp;</span><span class="nb">quot</span><span class="c1">;database-name&amp;quot;</span><span class="w">
+         </span><span class="no">:host</span><span class="w"> </span><span class="o">&amp;</span><span class="nb">quot</span><span class="c1">;host&amp;quot; ;;optional</span><span class="w">
+         </span><span class="no">:port</span><span class="w"> </span><span class="o">&amp;</span><span class="nb">quot</span><span class="c1">;port&amp;quot; ;;optional</span><span class="w">
+         </span><span class="no">:user</span><span class="w"> </span><span class="o">&amp;</span><span class="nb">quot</span><span class="c1">;sql-authentication-user-name&amp;quot;</span><span class="w">
+         </span><span class="no">:password</span><span class="w"> </span><span class="o">&amp;</span><span class="nb">quot</span><span class="c1">;password&amp;quot;})</span><span class="w">
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="p">(</span><span class="nf">jdbc/get-connection</span><span class="w"> </span><span class="n">db</span><span class="p">))</span><span class="w">
+</span><span class="p">(</span><span class="nf">jdbc/execute!</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="nb">quot</span><span class="c1">;select * from sys.objects  where type = &amp;#39;U&amp;#39;&amp;quot;])</span></code></pre></figure></div> -->
+      <div class="description"> 클로저 언어 및 관련 라이브러리 학습 노트</div>
+      <div class="description"> Created at 26 Feb 2020 </div>
+    </div>
+  </div>
+  
+  <div class="item">
+    <i class="large sticky note middle aligned icon"></i>
+    <div class="content">
+      <a href="/2020/01/23/prog-lang.html" class="header"> Prog Lang </a>
+      <!-- <div class="description"> <h1>Introduction</h1>
+<p>A peronsal study on programming lanaguage features such as procedual vs. declative,
+  static typing vs. dyanamic typing, strong typing vs. weak typing,
+  obejct-oriendted vs. functional programming and so on.</p>
+<h1>[Book] Languages mentioned in the book named &#8220;Seven Languages in Seven Weeks&#8221; authored by Bruce A. Tate</h1>
+<h2>Ruby</h2>
+<h2>Io</h2>
+<h2>Prolog</h2>
+<h2>Scala</h2>
+<h2>Erlang</h2>
+<h2>Clojure</h2>
+<h2>Haskell</h2>
+<h1>[Book] Land of Lisp - Learn to Program in Lisp, One game at a Time! authord by Conrad Barski</h1>
+<p>This book helps me to understand the basic concept of Lisp and details on Common
+  Lisp (CLISP). It shows the power of Lisp language by taking an example of
+  making a simple game.</p>
+<h1>[Video] Interested on Clojure CONJ 2019</h1>
+<h2>Sherlock Holmes, Consulting Developer - Stuart Halloway</h2>
+<p>https://www.youtube.com/watch?v=OUZZKtypink&amp;list=PLZdCLR02grLqSy15ALLAZDU6LGpAJDrAQ&amp;index=12&amp;t=0s</p>
+<h2>The Hitchhikers Guide to Multiparadigm Programming - Ariel Ortiz</h2>
+<p>https://www.youtube.com/watch?v=GvJm-eJ5o18&amp;list=PLZdCLR02grLqSy15ALLAZDU6LGpAJDrAQ&amp;index=3&amp;t=0s</p>
+</div> -->
+      <div class="description"> 프로그래밍 언어 학습 노트</div>
+      <div class="description"> Created at 23 Jan 2020 </div>
+    </div>
+  </div>
+  
+  <div class="item">
+    <i class="large sticky note middle aligned icon"></i>
+    <div class="content">
+      <a href="/tool/usage/2020/01/10/emacs.html" class="header"> Emacs 활용 </a>
+      <!-- <div class="description"> <h1>Doom Emacs</h1>
+<h2><a href="https://noelwelsh.com/posts/2019-01-10-doom-emacs.html">Doom Emacs Workflows by noel welsh</a></h2>
+<p>This is a good reference to get you familiar with basic workflow commands in
+  Doom Emacs. Please check this first when you don't know how to use
+  something.</p>
+<h2>In case of that SPC / p is not working to search files having some text</h2>
+<p>You need to install ripgrep (or silver search) so emacs can use rg, ag commands.
+  In MacOS, just do &#8220;brew install ripgrep the_silver_searcher&#8221;.</p>
+<h2>Helm and Ivy : a search engine to find out texts and complete text/code_keywords/commands for helping the edior to select a complete one.</h2>
+<p>There are lot of mentions among emacs user around community online, which one is
+  better. Each one has pros and cons so you need to choose or use both
+  appropriately for your purpose. Ivy is more modularized than Helm, you see Ivy itself,
+  and Counsel which wraps the common emacs search commands, Swiper which &#8230;</p>
+<h1>How-to elisp Programming</h1>
+<h2><a href="https://www.gnu.org/software/emacs/manual/eintr.html">An Introduction to Programming in Emacs Lisp</a></h2>
+</div> -->
+      <div class="description"> 이멕스 관련 Tips</div>
+      <div class="description"> Created at 10 Jan 2020 </div>
+    </div>
+  </div>
+  
 </div>
 
     </div>
