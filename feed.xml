@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-10-22T20:02:12+09:00</updated><id>/feed.xml</id><entry><title type="html">다형성(Polymorphism)에 대한 이해 (Clojure 언어)</title><link href="/2020/04/20/polymorphism.html" rel="alternate" type="text/html" title="다형성(Polymorphism)에 대한 이해 (Clojure 언어)" /><published>2020-04-20T00:00:00+09:00</published><updated>2020-04-20T00:00:00+09:00</updated><id>/2020/04/20/polymorphism</id><content type="html" xml:base="/2020/04/20/polymorphism.html">&lt;h1&gt;Basic References&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-10-24T14:21:42+09:00</updated><id>/feed.xml</id><entry><title type="html">다형성(Polymorphism)에 대한 이해 (Clojure 언어)</title><link href="/2020/04/20/polymorphism.html" rel="alternate" type="text/html" title="다형성(Polymorphism)에 대한 이해 (Clojure 언어)" /><published>2020-04-20T00:00:00+09:00</published><updated>2020-04-20T00:00:00+09:00</updated><id>/2020/04/20/polymorphism</id><content type="html" xml:base="/2020/04/20/polymorphism.html">&lt;h1&gt;Basic References&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.braveclojure.com/introduction/&quot;&gt;CLOJURE for the BRAVE and TRUE&lt;/a&gt; (2015년) authored by Daniel Higginbotham :
     클로저 개발에 꼭 필요한 것들을 쉽게 자세히 설명해 주는 책! (필독 강추)&lt;/li&gt;
@@ -854,33 +854,32 @@
   static typing vs. dyanamic typing, strong typing vs. weak typing,
   obejct-oriendted vs. functional programming and so on.&lt;/p&gt;
 &lt;h1&gt;[Book] Languages mentioned in the book named &amp;#8220;Seven Languages in Seven Weeks&amp;#8221; authored by Bruce A. Tate&lt;/h1&gt;
-&lt;h2&gt;Ruby&lt;/h2&gt;
-&lt;h2&gt;Io&lt;/h2&gt;
-&lt;h2&gt;Prolog&lt;/h2&gt;
-&lt;h2&gt;Scala&lt;/h2&gt;
-&lt;h2&gt;Erlang&lt;/h2&gt;
-&lt;h2&gt;Clojure&lt;/h2&gt;
-&lt;h2&gt;Haskell&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ruby&lt;/li&gt;
+  &lt;li&gt;Io&lt;/li&gt;
+  &lt;li&gt;Prolog&lt;/li&gt;
+  &lt;li&gt;Scala&lt;/li&gt;
+  &lt;li&gt;Erlang&lt;/li&gt;
+  &lt;li&gt;Clojure&lt;/li&gt;
+  &lt;li&gt;Haskell&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h1&gt;[Book] Land of Lisp - Learn to Program in Lisp, One game at a Time! authord by Conrad Barski&lt;/h1&gt;
 &lt;p&gt;This book helps me to understand the basic concept of Lisp and details on Common
   Lisp (CLISP). It shows the power of Lisp language by taking an example of
   making a simple game.&lt;/p&gt;
 &lt;h1&gt;[Video] Interested on Clojure CONJ 2019&lt;/h1&gt;
-&lt;h2&gt;Sherlock Holmes, Consulting Developer - Stuart Halloway&lt;/h2&gt;
-&lt;p&gt;https://www.youtube.com/watch?v=OUZZKtypink&amp;amp;list=PLZdCLR02grLqSy15ALLAZDU6LGpAJDrAQ&amp;amp;index=12&amp;amp;t=0s&lt;/p&gt;
-&lt;h2&gt;The Hitchhikers Guide to Multiparadigm Programming - Ariel Ortiz&lt;/h2&gt;
-&lt;p&gt;https://www.youtube.com/watch?v=GvJm-eJ5o18&amp;amp;list=PLZdCLR02grLqSy15ALLAZDU6LGpAJDrAQ&amp;amp;index=3&amp;amp;t=0s&lt;/p&gt;</content><author><name>xroger88</name></author><category term="programming" /><category term="language" /><summary type="html">Introduction A peronsal study on programming lanaguage features such as procedual vs. declative, static typing vs. dyanamic typing, strong typing vs. weak typing, obejct-oriendted vs. functional programming and so on. [Book] Languages mentioned in the book named &amp;#8220;Seven Languages in Seven Weeks&amp;#8221; authored by Bruce A. Tate Ruby Io Prolog Scala Erlang Clojure Haskell [Book] Land of Lisp - Learn to Program in Lisp, One game at a Time! authord by Conrad Barski This book helps me to understand the basic concept of Lisp and details on Common Lisp (CLISP). It shows the power of Lisp language by taking an example of making a simple game. [Video] Interested on Clojure CONJ 2019 Sherlock Holmes, Consulting Developer - Stuart Halloway https://www.youtube.com/watch?v=OUZZKtypink&amp;amp;list=PLZdCLR02grLqSy15ALLAZDU6LGpAJDrAQ&amp;amp;index=12&amp;amp;t=0s The Hitchhikers Guide to Multiparadigm Programming - Ariel Ortiz https://www.youtube.com/watch?v=GvJm-eJ5o18&amp;amp;list=PLZdCLR02grLqSy15ALLAZDU6LGpAJDrAQ&amp;amp;index=3&amp;amp;t=0s</summary></entry><entry><title type="html">Emacs 활용</title><link href="/tool/usage/2020/01/10/emacs.html" rel="alternate" type="text/html" title="Emacs 활용" /><published>2020-01-10T00:00:00+09:00</published><updated>2020-01-10T00:00:00+09:00</updated><id>/tool/usage/2020/01/10/emacs</id><content type="html" xml:base="/tool/usage/2020/01/10/emacs.html">&lt;h1&gt;Doom Emacs&lt;/h1&gt;
-&lt;h2&gt;&lt;a href=&quot;https://noelwelsh.com/posts/2019-01-10-doom-emacs.html&quot;&gt;Doom Emacs Workflows by noel welsh&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;This is a good reference to get you familiar with basic workflow commands in
-  Doom Emacs. Please check this first when you don't know how to use
-  something.&lt;/p&gt;
-&lt;h2&gt;In case of that SPC / p is not working to search files having some text&lt;/h2&gt;
-&lt;p&gt;You need to install ripgrep (or silver search) so emacs can use rg, ag commands.
-  In MacOS, just do &amp;#8220;brew install ripgrep the_silver_searcher&amp;#8221;.&lt;/p&gt;
-&lt;h2&gt;Helm and Ivy : a search engine to find out texts and complete text/code_keywords/commands for helping the edior to select a complete one.&lt;/h2&gt;
-&lt;p&gt;There are lot of mentions among emacs user around community online, which one is
-  better. Each one has pros and cons so you need to choose or use both
-  appropriately for your purpose. Ivy is more modularized than Helm, you see Ivy itself,
-  and Counsel which wraps the common emacs search commands, Swiper which &amp;#8230;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=OUZZKtypink&amp;amp;list=PLZdCLR02grLqSy15ALLAZDU6LGpAJDrAQ&amp;amp;index=12&amp;amp;t=0s&quot;&gt;Sherlock Holmes, Consulting Developer&lt;/a&gt; - Stuart Halloway&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=GvJm-eJ5o18&amp;amp;list=PLZdCLR02grLqSy15ALLAZDU6LGpAJDrAQ&amp;amp;index=3&amp;amp;t=0s&quot;&gt;The Hitchhikers Guide to Multiparadigm Programming&lt;/a&gt; - Ariel Ortiz&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>xroger88</name></author><category term="programming" /><category term="language" /><summary type="html">Introduction A peronsal study on programming lanaguage features such as procedual vs. declative, static typing vs. dyanamic typing, strong typing vs. weak typing, obejct-oriendted vs. functional programming and so on. [Book] Languages mentioned in the book named &amp;#8220;Seven Languages in Seven Weeks&amp;#8221; authored by Bruce A. Tate Ruby Io Prolog Scala Erlang Clojure Haskell [Book] Land of Lisp - Learn to Program in Lisp, One game at a Time! authord by Conrad Barski This book helps me to understand the basic concept of Lisp and details on Common Lisp (CLISP). It shows the power of Lisp language by taking an example of making a simple game. [Video] Interested on Clojure CONJ 2019 Sherlock Holmes, Consulting Developer - Stuart Halloway The Hitchhikers Guide to Multiparadigm Programming - Ariel Ortiz</summary></entry><entry><title type="html">Emacs 활용</title><link href="/tool/usage/2020/01/10/emacs.html" rel="alternate" type="text/html" title="Emacs 활용" /><published>2020-01-10T00:00:00+09:00</published><updated>2020-01-10T00:00:00+09:00</updated><id>/tool/usage/2020/01/10/emacs</id><content type="html" xml:base="/tool/usage/2020/01/10/emacs.html">&lt;h1&gt;Doom Emacs&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://noelwelsh.com/posts/2019-01-10-doom-emacs.html&quot;&gt;Doom Emacs Workflows by noel welsh&lt;/a&gt;
+    This is a good reference to get you familiar with basic workflow commands in Doom Emacs. Please check this first when you don't know how to use something.&lt;/li&gt;
+  &lt;li&gt;In case of that SPC / p is not working to search files having some text
+    You need to install ripgrep (or silver search) so emacs can use rg, ag commands. In MacOS, just do &amp;#8220;brew install ripgrep the_silver_searcher&amp;#8221;.&lt;/li&gt;
+  &lt;li&gt;Helm and Ivy : a search engine to find out texts and complete text/code_keywords/commands for helping the edior to select a complete one. There are lot of mentions among emacs user around community online, which one is better. Each one has pros and cons so you need to choose or use both appropriately for your purpose. Ivy is more modularized than Helm, you see Ivy itself, and Counsel which wraps the common emacs search commands, Swiper which &amp;#8230;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h1&gt;How-to elisp Programming&lt;/h1&gt;
-&lt;h2&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/eintr.html&quot;&gt;An Introduction to Programming in Emacs Lisp&lt;/a&gt;&lt;/h2&gt;</content><author><name>xroger88</name></author><category term="tool" /><category term="usage" /><category term="ide" /><category term="emacs" /><category term="doom" /><summary type="html">Doom Emacs Doom Emacs Workflows by noel welsh This is a good reference to get you familiar with basic workflow commands in Doom Emacs. Please check this first when you don't know how to use something. In case of that SPC / p is not working to search files having some text You need to install ripgrep (or silver search) so emacs can use rg, ag commands. In MacOS, just do &amp;#8220;brew install ripgrep the_silver_searcher&amp;#8221;. Helm and Ivy : a search engine to find out texts and complete text/code_keywords/commands for helping the edior to select a complete one. There are lot of mentions among emacs user around community online, which one is better. Each one has pros and cons so you need to choose or use both appropriately for your purpose. Ivy is more modularized than Helm, you see Ivy itself, and Counsel which wraps the common emacs search commands, Swiper which &amp;#8230; How-to elisp Programming An Introduction to Programming in Emacs Lisp</summary></entry></feed>
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/eintr.html&quot;&gt;An Introduction to Programming in Emacs Lisp&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>xroger88</name></author><category term="tool" /><category term="usage" /><category term="ide" /><category term="emacs" /><category term="doom" /><summary type="html">Doom Emacs Doom Emacs Workflows by noel welsh This is a good reference to get you familiar with basic workflow commands in Doom Emacs. Please check this first when you don't know how to use something. In case of that SPC / p is not working to search files having some text You need to install ripgrep (or silver search) so emacs can use rg, ag commands. In MacOS, just do &amp;#8220;brew install ripgrep the_silver_searcher&amp;#8221;. Helm and Ivy : a search engine to find out texts and complete text/code_keywords/commands for helping the edior to select a complete one. There are lot of mentions among emacs user around community online, which one is better. Each one has pros and cons so you need to choose or use both appropriately for your purpose. Ivy is more modularized than Helm, you see Ivy itself, and Counsel which wraps the common emacs search commands, Swiper which &amp;#8230; How-to elisp Programming An Introduction to Programming in Emacs Lisp</summary></entry></feed>
